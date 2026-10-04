@@ -64,7 +64,7 @@ int arr_product(const int* arr, std::size_t n) {
 
 // Медиана (не меняет исходный массив!)
 double arr_median(const int* arr, std::size_t n) {
-    if (n == 0) throw std::invalid_argument("empty array");
+    if (n == 0) throw std::invalid_argument("arr_median: array must not be empty");
 
     int* copy = new int[n];
     std::memcpy(copy, arr, n * sizeof(int));

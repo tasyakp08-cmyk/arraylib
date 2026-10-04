@@ -36,6 +36,10 @@ int main() {
     int d[] = {1, 2, 3, 4};
     assert(arr_product(d, 4) == 24);
 
+    // НОВЫЙ ТЕСТ: медиана нечётного размера (5 элементов)
+    int e[] = {5, 1, 9, 3, 7};
+    assert(close(arr_median(e, 5), 5.0));
+
     std::cout << "[unit] All tests passed\n";
     return 0;
 }
