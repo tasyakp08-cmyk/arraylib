@@ -1,0 +1,81 @@
+#include "arraylib.h"
+#include <algorithm>
+#include <cstring>
+#include <stdexcept>
+
+// Сумма
+int arr_sum(const int* arr, std::size_t n) {
+    int s = 0;
+    for (std::size_t i = 0; i < n; ++i) s += arr[i];
+    return s;
+}
+
+// Максимум
+int arr_max(const int* arr, std::size_t n) {
+    int m = arr[0];
+    for (std::size_t i = 1; i < n; ++i)
+        if (arr[i] > m) m = arr[i];
+    return m;
+}
+
+// Минимум
+int arr_min(const int* arr, std::size_t n) {
+    int m = arr[0];
+    for (std::size_t i = 1; i < n; ++i)
+        if (arr[i] < m) m = arr[i];
+    return m;
+}
+
+// Среднее
+double arr_average(const int* arr, std::size_t n) {
+    if (n == 0) return 0.0;
+    long long s = 0;
+    for (std::size_t i = 0; i < n; ++i) s += arr[i];
+    return static_cast<double>(s) / static_cast<double>(n);
+}
+
+// Положительные
+int arr_count_positive(const int* arr, std::size_t n) {
+    int c = 0;
+    for (std::size_t i = 0; i < n; ++i) if (arr[i] > 0) ++c;
+    return c;
+}
+
+// Отрицательные
+int arr_count_negative(const int* arr, std::size_t n) {
+    int c = 0;
+    for (std::size_t i = 0; i < n; ++i) if (arr[i] < 0) ++c;
+    return c;
+}
+
+// Нули
+int arr_count_zero(const int* arr, std::size_t n) {
+    int c = 0;
+    for (std::size_t i = 0; i < n; ++i) if (arr[i] == 0) ++c;
+    return c;
+}
+
+// Произведение
+int arr_product(const int* arr, std::size_t n) {
+    int p = 1;
+    for (std::size_t i = 0; i < n; ++i) p *= arr[i];
+    return p;
+}
+
+// Медиана (не меняет исходный массив!)
+double arr_median(const int* arr, std::size_t n) {
+    if (n == 0) throw std::invalid_argument("empty array");
+
+    int* copy = new int[n];
+    std::memcpy(copy, arr, n * sizeof(int));
+    std::sort(copy, copy + n);
+
+    double result;
+    if (n % 2 == 0)
+        result = (copy[n/2 - 1] + copy[n/2]) / 2.0;
+    else
+        result = copy[n/2];
+
+    delete[] copy;
+    return result;
+}
